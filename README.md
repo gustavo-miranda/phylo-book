@@ -1,2 +1,2 @@
 # phylo-book
-script to create tables to phylogenetics book
+script to create graphs to phylogenetics book
