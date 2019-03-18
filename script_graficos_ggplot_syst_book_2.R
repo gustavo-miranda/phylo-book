@@ -1,40 +1,34 @@
 #########################################################################################################
-###################### Script para gr·ficos do livro "Sistem·tica FilogenÈtica" #########################
+######################## Script for graphs in book "Sistem√°tica Filogen√©tica" ###########################
 #########################################################################################################
 ####################################### Gustavo Silva de Miranda ########################################
 
 
-# Instalar package (caso n„o tenha instalado)
+# Install
 install.packages("ggplot2", dependencies = T)
 install.packages("ggalt", dependencies = T)
 install.packages("ggExtra", dependencies = T)
 
-# Carregar package
+# Load packages
 library(ggplot2)
 library(ggalt)
 library(ggExtra)
 
 #########################################################################################################
-############################################### Exemplos ################################################
+############################################### Examples ################################################
 #########################################################################################################
-
+#### Modified from: 
+### http://girke.bioinformatics.ucr.edu/GEN242/mydoc_Rgraphics_5.html#ggplot-function) 
+### http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html
 
 dsmall <- diamonds[sample(nrow(diamonds), 1000), ]
 midwest <- read.csv("http://goo.gl/G1K41K")  # bkup data source
-
-
-
-
-
 
 ########## Scatter plots
 ########## 
 p <- ggplot(dsmall, aes(carat, price, color=color)) + 
   geom_point(size=4)
 print(p)
-
-
-
 
 
 ########## Regression line
@@ -45,10 +39,6 @@ p <- ggplot(dsmall, aes(carat, price)) + geom_point() +
 print(p)
 
 
-
-
-
-
 ########## Several regression lines
 ########## 
 p <- ggplot(dsmall, aes(carat, price, group=color)) + 
@@ -57,17 +47,10 @@ p <- ggplot(dsmall, aes(carat, price, group=color)) +
 print(p)
 
 
-
-
-
 ########## Local regression curve (loess)
 ########## 
 p <- ggplot(dsmall, aes(carat, price)) + geom_point() + geom_smooth() 
 print(p) # Setting se=FALSE removes error shade
-
-
-
-
 
 
 ########## Another scatter plot
@@ -88,11 +71,6 @@ gg <- ggplot(midwest, aes(x=area, y=poptotal)) +
        caption = "Source: midwest")
 
 plot(gg)
-
-
-
-
-
 
 
 ########## Scatterplot With Encircling
@@ -118,20 +96,11 @@ ggplot(midwest, aes(x=area, y=poptotal)) +
        caption="Source: midwest")
 
 
-
-
-
-
-
 ########## Line plot
 ########## 
 p <- ggplot(iris, aes(Petal.Length, Petal.Width, group=Species, 
                       color=Species)) + geom_line() 
 print(p)
-
-
-
-
 
 
 ########## Faceting
@@ -140,11 +109,6 @@ p <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
   geom_line(aes(color=Species), size=1) + 
   facet_wrap(~Species, ncol=1)
 print(p)
-
-
-
-
-
 
 
 ########## Bar Plots
@@ -167,22 +131,12 @@ p <- ggplot(df_mean, aes(Samples, Values, fill = Species)) +
 print(p)
 
 
-
-
-
-
-
 ########## Horizontal orientation
 ########## 
 p <- ggplot(df_mean, aes(Samples, Values, fill = Species)) + 
   geom_bar(position="dodge", stat="identity") + coord_flip() + 
   theme(axis.text.y=element_text(angle=0, hjust=1))
 print(p) 
-
-
-
-
-
 
 
 ########## Faceting
@@ -192,20 +146,11 @@ p <- ggplot(df_mean, aes(Samples, Values)) + geom_bar(aes(fill = Species), stat=
 print(p)
 
 
-
-
-
-
 ########## Error bars
 ########## 
 p <- ggplot(df_mean, aes(Samples, Values, fill = Species)) + 
   geom_bar(position="dodge", stat="identity") + geom_errorbar(limits, position="dodge") 
 print(p) 
-
-
-
-
-
 
 
 ########## Mirrored
@@ -217,10 +162,6 @@ print(p)
 
 
 
-
-
-
-
 ########## Changing Color Settings
 ########## 
 library(RColorBrewer)
@@ -228,10 +169,6 @@ p <- ggplot(df_mean, aes(Samples, Values, fill=Species, color=Species)) +
   geom_bar(position="dodge", stat="identity") + geom_errorbar(limits, position="dodge") + 
   scale_fill_brewer(palette="Blues") + scale_color_brewer(palette = "Greys") 
 print(p)
-
-
-
-
 
 
 
@@ -246,19 +183,9 @@ p <- ggplot(df, aes(Position, Values)) + geom_line(aes(color=Samples)) + facet_w
 print(p)
 
 
-
-
-
-
-
 ########## Same data represented in box plot as follows
 ########## 
 ggplot(df, aes(Samples, Values, fill=Samples)) + geom_boxplot()
-
-
-
-
-
 
 
 ########## Jitter Plots
@@ -268,19 +195,10 @@ p <- ggplot(dsmall, aes(color, price/carat)) +
 print(p)
 
 
-
-
-
-
 ########## Box plots
 ########## 
 p <- ggplot(dsmall, aes(color, price/carat, fill=color)) + geom_boxplot()
 print(p) 
-
-
-
-
-
 
 
 ########## Density plots
@@ -291,21 +209,11 @@ p <- ggplot(dsmall, aes(carat)) + geom_density(aes(fill = color)) # Area colorin
 print(p) 
 
 
-
-
-
-
-
 ########## Histograms
 ########## 
 p <- ggplot(iris, aes(x=Sepal.Width)) + geom_histogram(aes(y = ..density.., 
       fill = ..count..), binwidth=0.2) + geom_density()  
 print(p) 
-
-
-
-
-
 
 
 ########## Marginal Histogram / Boxplot
@@ -320,11 +228,6 @@ ggMarginal(g, type = "boxplot", fill="transparent") # Boxplot
 ggMarginal(g, type = "density", fill="transparent") # Densidade
 
 
-
-
-
-
-
 ########## Pie Chart
 ########## 
 df <- data.frame(variable=rep(c("cat", "mouse", "dog", "bird", "fly")), 
@@ -335,22 +238,12 @@ p <- ggplot(df, aes(x = "", y = value, fill = variable)) +
 print(p) 
 
 
-
-
-
-
-
 ########## Wind Rose Pie Chart
 ########## 
 p <- ggplot(df, aes(x = variable, y = value, fill = variable)) + 
   geom_bar(width = 1, stat="identity") + coord_polar("y", start=pi / 3) + 
   ggtitle("Pie Chart") 
 print(p) 
-
-
-
-
-
 
 
 ########## Arranging Graphics on Page
@@ -366,17 +259,8 @@ print(b, vp = viewport(layout.pos.row = 2, layout.pos.col = 1))
 print(c, vp = viewport(layout.pos.row = 2, layout.pos.col = 2, width=0.3, height=0.3, x=0.8, y=0.8))
 
 
-
-
-
-
-
 ########## Inserting Graphics into Plots
 ########## 
 library(grid)
 print(a)
 print(b, vp=viewport(width=0.3, height=0.3, x=0.8, y=0.8))
-
-
-
-
