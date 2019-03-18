@@ -9,7 +9,7 @@ install.packages("ggplot2", dependencies = T)
 install.packages("ggalt", dependencies = T)
 install.packages("ggExtra", dependencies = T)
 
-# Load packages
+# Load
 library(ggplot2)
 library(ggalt)
 library(ggExtra)
